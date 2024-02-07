@@ -12,7 +12,7 @@ public class InternetShopPagesTest {
 
     HomePage homePage = new HomePage(baseFunc);         //v kakom page mi rabotajem( ukazivajem emu )
     homePage.acceptCookies();
-
+   // homePage.selectMenuItem("Mēbeles");
 
 
     }
