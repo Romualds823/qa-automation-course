@@ -32,18 +32,17 @@ public class InternetShopTests {
 
         //find element
         WebElement acceptBtn = browser.findElement(ACCEPT_COOKIES_BTN);
-        //click on this element
         acceptBtn.click();
 
         //Find all section
         //List<WebElement> menuItems = browser.findElements(MENU_ITEM); ona ne ispolzujetsja mozno delete peremenaja seraja
-                                                                                    //peremenaja menuItems
+        //peremenaja menuItems
         //Find necessary section ( Mebeles )
 
         WebElement menuBlock = browser.findElement(MENU);
         List<WebElement> items = menuBlock.findElements(MENU_ITEM);
 
-                            //dvojnoj sle6// esli nado peresko4itj paru elementov , v lokatore
+        //dvojnoj sle6// esli nado peresko4itj paru elementov , v lokatore
 
         boolean isSectionFound = false;        // peremenaja : na6li sekciju ili net?     srazu false tipo ne najdena
         for (WebElement we : items) {                                   // cikl dolzen pereubeditj nas
@@ -55,12 +54,12 @@ public class InternetShopTests {
             }
         }
         Assertions.assertTrue(isSectionFound, "Section not found!");    //ozidajem 4to budet True
-                                                        // v kovi4kah sms esli ne najdot to pokazit v o6ibke
-        }
+        // v kovi4kah sms esli ne najdot to pokazit v o6ibke
+    }
 
     //Kak rabotajut cikli
-       @Test
-     public void workingWithLists() {
+    @Test
+    public void workingWithLists() {
         List<String> names = new ArrayList<>(); //List vsegda vo mnozestvenom 4isle, pustoj spisok Arraylist
         names.add("Dmitry"); //0
         names.add("Laura");  //1
@@ -77,18 +76,18 @@ public class InternetShopTests {
         }
         //----------------------------FOREACH------------------------   // eto cikl dlja kazdogo elementa
 
-       for (String name : names) {             // (v kakuju peremenuju lozim : spisok kotorij prohodim )
+        for (String name : names) {             // (v kakuju peremenuju lozim : spisok kotorij prohodim )
             System.out.println(name);
 
-       }
+        }
 
 
         System.out.println(names.isEmpty());   //Vivodim rezultat v konsolj (posmotretj)
-       System.out.println(names.size());
+        System.out.println(names.size());
         System.out.println(names.get(2));   // 2 t.k imena s4itajem s 0 ( get t.k mi hotim vivesti imenno 2 ( vitalija)
         // eto esli mi rabotajem to4e4no
 
     }
 
 
-    }
+}
