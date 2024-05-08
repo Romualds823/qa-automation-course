@@ -1,5 +1,7 @@
 package pageobject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,6 +16,7 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
     private WebDriver browser;
     private WebDriverWait wait;
     private JavascriptExecutor executor;
+    private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
     public BaseFunc() {
         ChromeOptions options = new ChromeOptions();
@@ -21,6 +24,7 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
         options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
         options.addArguments("--disable-notifications");
 
+        LOGGER.info("Opening Web browser");
         browser = new ChromeDriver(options);
         browser.manage().window().maximize();
 
@@ -36,7 +40,7 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
             url = "http://" + url;
         }
 
-
+        LOGGER.info("Opening URL: " + url);
         browser.get(url);
 
 
@@ -50,6 +54,8 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
             try {
                 we.click();
             } catch (ElementClickInterceptedException e) {
+                LOGGER.warn("Cant's perform click by Selenium, using JS");
+                //System.out.println("Cant's perform click by Selenium");
                 executor.executeScript("arguments[0].click();",we);
         }
 
@@ -63,14 +69,21 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
         return browser.findElements(locator);
     }
 
+    public List<WebElement> findElements(WebElement parent, By locator) {
+        return wait.until(ExpectedConditions.visibilityOf(parent)).findElements(locator);
+    }
+
     public void scrollToElement(WebElement we) {
         executor.executeScript("arguments[0].scrollIntoView(true);", we);
-        executor.executeScript("window.scrollBy(0,200);");
+        executor.executeScript("window.scrollBy(0, 200);");
     }
 
 
     public void waitForText(By locator,String text) {
         wait.until(ExpectedConditions.textToBe(locator, text));
+    }
+    public void waitForContainingText(By locator , String text) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(locator,text));
     }
 
     public void typeText(By locator, String text) {
@@ -80,10 +93,25 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
 
     }
 
+    public void typeTextInCustomField(By locator, String text) {
+        WebElement input = findElement(locator);
+     //   input.click();
+        hardClick(input);
+
+            input.sendKeys(Keys.CONTROL + "a");
+            input.sendKeys(Keys.DELETE);
+
+            input.sendKeys(text);
+
+    }
+
     public void pressEnter(By locator) {
         findElement(locator).sendKeys(Keys.ENTER);
 
     }
 
+    public String getText(WebElement parent, By locator) {
+        return wait.until(ExpectedConditions.visibilityOf(parent)).findElement(locator).getText();
+    }
 
 }
