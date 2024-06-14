@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageobject.pages.HomePage;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -43,7 +44,11 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
         LOGGER.info("Opening URL: " + url);
         browser.get(url);
 
+    }
 
+    public HomePage openHomePage()  {
+        openURL("1a.lv");
+        return new HomePage(this);
     }
 
     public void click(By locator) {
@@ -112,6 +117,13 @@ public class BaseFunc {                 // eto vzaimodejstvije s brauzerom( brau
 
     public String getText(WebElement parent, By locator) {
         return wait.until(ExpectedConditions.visibilityOf(parent)).findElement(locator).getText();
+    }
+
+    public void closeBrowser()  {
+        LOGGER.info("Closing browser window");
+        if (browser != null)    {
+            browser.close();
+        }
     }
 
 }

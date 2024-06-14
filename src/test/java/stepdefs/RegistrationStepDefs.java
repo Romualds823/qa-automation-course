@@ -13,27 +13,30 @@ public class RegistrationStepDefs {
     private BaseFunc baseFunc;
     private HomePage homePage;
     private LoginPage loginPage;
- //   private String firstName;
-
-   private RegistrationPage registrationPage ;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private RegistrationPage registrationPage ;
 
 
 
     @Given("user name: {string}")
     public void setUserName(String firstName)   {
- //       this.firstName = firstName;
+        this.firstName = firstName;
     }
     @Given("user last name: {string}")
     public void setLastName(String lastName){
-
+        this.lastName = lastName;
     }
     @Given("user email: {string}")
     public void setEmail(String email)    {
+        this.email = email;
 
     }
     @Given("new password is {string}")
     public void setPassword(String password)    {
-
+        this.password = password;
     }
     @When("we open browser window")
     public void openBrowserWindow(){
@@ -57,7 +60,7 @@ public class RegistrationStepDefs {
         loginPage = new LoginPage(baseFunc);
     }
     @When("we are opening registration form")
-    public void openRegistrrationPage()  {
+    public void openRegistrationPage()  {
         loginPage.openRegistrationPage();
     }
 

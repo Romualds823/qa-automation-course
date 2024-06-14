@@ -11,8 +11,9 @@ public class LoginPage  {
         this.baseFunc = baseFunc;
     }
 
-    public void openRegistrationPage()  {
+    public RegistrationPage openRegistrationPage()  {
         baseFunc.click(REGISTRATION_LINK);
+        return new RegistrationPage(baseFunc);
     }
 
 }

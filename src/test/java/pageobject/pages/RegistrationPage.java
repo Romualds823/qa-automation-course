@@ -1,5 +1,6 @@
 package pageobject.pages;
 
+import model.User;
 import org.openqa.selenium.By;
 import pageobject.BaseFunc;
 import stepdefs.RegistrationStepDefs;
@@ -25,5 +26,14 @@ public class RegistrationPage {
         baseFunc.typeText(EMAIL_INPUT, email);
         baseFunc.typeText(PASSWORD_ADD,password);
         baseFunc.typeText(PASSWORD_CHECK_ADD,passwordConfirmation);
+    }
+
+    public void fillInRegistrationForm(User user)    {
+        baseFunc.typeText(FIRST_NAME_INPUT, user.getFirstName());
+        baseFunc.typeText(LAST_NAME_INPUT, user.getLastName());
+        baseFunc.typeText(EMAIL_INPUT, user.getEmail());
+     //   baseFunc.typeText(PASSWORD_ADD, user.getPassword());
+     //   baseFunc.typeText(PASSWORD_CHECK_ADD,user.getPasswordConfirmation());
+
     }
 }
